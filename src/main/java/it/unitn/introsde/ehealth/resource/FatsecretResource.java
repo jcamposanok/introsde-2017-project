@@ -5,7 +5,7 @@ import com.github.scribejava.core.model.OAuthRequest;
 import com.github.scribejava.core.model.Verb;
 import com.github.scribejava.core.oauth.OAuth10aService;
 import it.unitn.introsde.ehealth.oauth.FatsecretAuthService;
-import it.unitn.introsde.ehealth.resource.fatsecret.FatsecretFoodResource;
+import it.unitn.introsde.ehealth.resource.fatsecret.FatsecretFoodEntryResource;
 import org.glassfish.jersey.logging.LoggingFeature;
 
 import javax.ws.rs.Path;
@@ -16,7 +16,11 @@ import javax.ws.rs.core.Request;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
 import java.io.IOException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.*;
 import java.util.concurrent.ExecutionException;
+import java.util.concurrent.TimeUnit;
 import java.util.logging.Logger;
 
 @Path("fatsecret")
@@ -40,17 +44,39 @@ public class FatsecretResource {
         FatsecretAuthService.setApiName(API_NAME);
     }
 
-    @Path("foods")
-    public FatsecretFoodResource getFatsecretFoodResource() {
-        FatsecretAuthService.setResourceName("foods");
-        return new FatsecretFoodResource(uriInfo, request);
+    @Path("food-diary")
+    public FatsecretFoodEntryResource getFatsecretFoodEntryResource() {
+        return new FatsecretFoodEntryResource(uriInfo, request);
     }
+
+    public static int parseDaysCountFromDateString(String date) {
+        long dateDays = 0;
+        if (date != null) {
+            // Fatsecret API date param: The number of days since January 1, 1970
+            SimpleDateFormat myFormat = new SimpleDateFormat("yyyy-MM-dd");
+            String startDate = "1970-01-01";
+            try {
+                Date date1 = myFormat.parse(startDate);
+                Date date2 = myFormat.parse(date);
+                long diff = date2.getTime() - date1.getTime();
+                dateDays = TimeUnit.DAYS.convert(diff, TimeUnit.MILLISECONDS);
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+        }
+        return (int) dateDays;
+    }
+
 
     public static Response getResponse(UriInfo uriInfo, String method) {
-        return getResponse(uriInfo, method, "json");
+        return getResponse(uriInfo, method, new HashMap<>(), "json");
     }
 
-    public static Response getResponse(UriInfo uriInfo, String method, String format) {
+    public static Response getResponse(UriInfo uriInfo, String method, Map<String, String> params) {
+        return getResponse(uriInfo, method, params, "json");
+    }
+
+    public static Response getResponse(UriInfo uriInfo, String method, Map<String, String> params, String format) {
         // Check access token
         String payload = "";
         if (FatsecretAuthService.getAccessToken() == null) {
@@ -69,6 +95,9 @@ public class FatsecretResource {
             final OAuthRequest request = new OAuthRequest(Verb.GET, API_ROOT_URL);
             request.addParameter("method", method);
             request.addParameter("format", format);
+            for (Map.Entry<String, String> p : params.entrySet()) {
+                request.addParameter(p.getKey(), p.getValue());
+            }
             service.signRequest(FatsecretAuthService.getAccessToken(), request); // the access token from step 4
             try {
                 final com.github.scribejava.core.model.Response serviceResponse = service.execute(request);

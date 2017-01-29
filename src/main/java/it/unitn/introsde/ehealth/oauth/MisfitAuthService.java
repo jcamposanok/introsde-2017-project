@@ -10,32 +10,15 @@ import javax.ws.rs.core.UriInfo;
 
 
 
-public class MisfitAuthService {
+public class MisfitAuthService extends ExternalProviderAuthService {
 
     private static String accessToken = null;
-
-    private static String apiName = "";
-    private static String resourceName = "";
 
     private static OAuth2CodeGrantFlow flow;
     private static ClientIdentifier clientIdentifier;
 
     private static String REDIRECT_PATH = "oauth2/authorize";
 
-
-    public static String getApiName() {
-        return apiName;
-    }
-    public static void setApiName(String apiName) {
-        MisfitAuthService.apiName = apiName;
-    }
-
-    public static String getResourceName() {
-        return resourceName;
-    }
-    public static void setResourceName(String resourceName) {
-        MisfitAuthService.resourceName = resourceName;
-    }
 
     public static String getAccessToken() {
         return accessToken;

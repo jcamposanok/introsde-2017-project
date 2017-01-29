@@ -38,9 +38,15 @@ public class OAuth1Resource {
     }
 
     @GET
-    @Path("authorize/fatsecret/foods")
-    public Response authorizeFatsecret(@QueryParam("oauth_token") String requestToken, @QueryParam("oauth_verifier") String verifier) {
-        return authorize(verifier, "fatsecret/foods");
+    @Path("authorize/fatsecret/food-diary")
+    public Response authorizeFatsecretFoodEntry(@QueryParam("oauth_token") String requestToken, @QueryParam("oauth_verifier") String verifier) {
+        return authorize(verifier, "fatsecret/food-diary");
+    }
+
+    @GET
+    @Path("authorize/fatsecret/food-diary/month")
+    public Response authorizeFatsecretFoodEntryMonth(@QueryParam("oauth_token") String requestToken, @QueryParam("oauth_verifier") String verifier) {
+        return authorize(verifier, "fatsecret/food-diary/month");
     }
 
 

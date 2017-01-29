@@ -1,5 +1,6 @@
 package it.unitn.introsde.ehealth.resource.misfit;
 
+import it.unitn.introsde.ehealth.oauth.MisfitAuthService;
 import it.unitn.introsde.ehealth.resource.MisfitResource;
 
 import javax.ws.rs.GET;
@@ -14,9 +15,11 @@ public class MisfitDeviceResource {
     @Context
     Request request;
 
+    private static String RESOURCE_NAME = "device";
     private static String API_ENDPOINT = "move/resource/v1/user/me/device";
 
     public MisfitDeviceResource(UriInfo uriInfo, Request request) {
+        MisfitAuthService.setResourceName(RESOURCE_NAME);
         this.uriInfo = uriInfo;
         this.request = request;
     }

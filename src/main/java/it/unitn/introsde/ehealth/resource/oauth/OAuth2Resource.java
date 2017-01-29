@@ -45,4 +45,22 @@ public class OAuth2Resource {
         return authorize(code, state, "misfit/device");
     }
 
+    @GET
+    @Path("authorize/misfit/activity")
+    public Response authorizeMisfitActivity(@QueryParam("code") String code, @QueryParam("state") String state) {
+        return authorize(code, state, "misfit/activity");
+    }
+
+    @GET
+    @Path("authorize/misfit/activity/summary")
+    public Response authorizeMisfitActivitySummary(@QueryParam("code") String code, @QueryParam("state") String state) {
+        return authorize(code, state, "misfit/activity/summary");
+    }
+
+    @GET
+    @Path("authorize/misfit/activity/goals")
+    public Response authorizeMisfitActivityGoals(@QueryParam("code") String code, @QueryParam("state") String state) {
+        return authorize(code, state, "misfit/activity/goals");
+    }
+
 }

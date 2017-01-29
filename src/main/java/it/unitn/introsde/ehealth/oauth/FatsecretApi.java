@@ -3,7 +3,6 @@ package it.unitn.introsde.ehealth.oauth;
 import com.github.scribejava.core.builder.api.DefaultApi10a;
 import com.github.scribejava.core.model.OAuth1RequestToken;
 import com.github.scribejava.core.model.Verb;
-import com.github.scribejava.core.services.HMACSha1SignatureService;
 import com.github.scribejava.core.services.SignatureService;
 
 public class FatsecretApi extends DefaultApi10a {

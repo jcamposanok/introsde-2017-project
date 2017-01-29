@@ -14,16 +14,13 @@ import java.io.IOException;
 import java.util.concurrent.ExecutionException;
 
 
-public class FatsecretAuthService {
+public class FatsecretAuthService extends ExternalProviderAuthService {
 
     private static String consumerKey = null;
     private static String consumerSecret = null;
 
     private static OAuth1AccessToken accessToken = null;
     private static String accessTokenSecret = null;
-
-    private static String apiName = "";
-    private static String resourceName = "";
 
     private static OAuth10aService flow;
     private static OAuth1RequestToken requestToken;
@@ -37,21 +34,6 @@ public class FatsecretAuthService {
 
     public static OAuth1RequestToken getRequestToken() {
         return requestToken;
-    }
-
-
-    public static String getApiName() {
-        return apiName;
-    }
-    public static void setApiName(String apiName) {
-        FatsecretAuthService.apiName = apiName;
-    }
-
-    public static String getResourceName() {
-        return resourceName;
-    }
-    public static void setResourceName(String resourceName) {
-        FatsecretAuthService.resourceName = resourceName;
     }
 
     public static OAuth1AccessToken getAccessToken() {
