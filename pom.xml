@@ -142,7 +142,19 @@
             <version>v1-rev25-1.22.0</version>
         </dependency>
 
+        <!-- SQLiteJDBC -->
+        <dependency>
+            <groupId>org.xerial</groupId>
+            <artifactId>sqlite-jdbc</artifactId>
+            <version>${sqlite.version}</version>
+        </dependency>
 
+        <!-- eclipselink -->
+        <dependency>
+            <groupId>org.eclipse.persistence</groupId>
+            <artifactId>eclipselink</artifactId>
+            <version>${eclipselink.version}</version>
+        </dependency>
     </dependencies>
 
     <build>

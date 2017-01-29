@@ -20,7 +20,6 @@ public class FatsecretAuthService extends ExternalProviderAuthService {
     private static String consumerSecret = null;
 
     private static OAuth1AccessToken accessToken = null;
-    private static String accessTokenSecret = null;
 
     private static OAuth10aService flow;
     private static OAuth1RequestToken requestToken;
@@ -29,6 +28,24 @@ public class FatsecretAuthService extends ExternalProviderAuthService {
 
 
     public static OAuth10aService getFlow() {
+        if (flow == null) {
+            getFlow("");
+        }
+        return flow;
+    }
+
+    public static OAuth10aService getFlow(String callbackUri) {
+        if (flow == null) {
+            ServiceBuilder serviceBuilder = new ServiceBuilder()
+                    .apiKey(consumerKey)
+                    .apiSecret(consumerSecret);
+            if (callbackUri != "") {
+                serviceBuilder = serviceBuilder.callback(callbackUri);
+            }
+            flow = serviceBuilder
+                    .signatureType(SignatureType.QueryString)
+                    .build(FatsecretApi.instance());
+        }
         return flow;
     }
 
@@ -42,12 +59,6 @@ public class FatsecretAuthService extends ExternalProviderAuthService {
     public static void setAccessToken(OAuth1AccessToken accessToken) {
         FatsecretAuthService.accessToken = accessToken;
     }
-    public static String getAccessTokenSecret() {
-        return accessTokenSecret;
-    }
-    public static void setAccessTokenSecret(String accessTokenSecret) {
-        FatsecretAuthService.accessTokenSecret = accessTokenSecret;
-    }
 
     public static void setConsumerCredentials(String consumerKey, String consumerSecret) {
         FatsecretAuthService.consumerKey = consumerKey;
@@ -59,12 +70,7 @@ public class FatsecretAuthService extends ExternalProviderAuthService {
                 .fromUri(uriInfo.getBaseUri())
                 .path(REDIRECT_PATH).path(apiName).path(resourceName).build().toString();
 
-        flow = new ServiceBuilder()
-                .apiKey(consumerKey)
-                .apiSecret(consumerSecret)
-                .callback(callbackUri)
-                .signatureType(SignatureType.QueryString)
-                .build(FatsecretApi.instance());
+        flow = getFlow(callbackUri);
 
         requestToken = flow.getRequestToken();
         final String authorizationUri = flow.getAuthorizationUrl(requestToken);

@@ -1,15 +1,19 @@
 package it.unitn.introsde.ehealth.resource;
 
+import com.github.scribejava.core.model.OAuth1AccessToken;
+import it.unitn.introsde.ehealth.model.TokenModel;
+import it.unitn.introsde.ehealth.oauth.FatsecretAuthService;
 import it.unitn.introsde.ehealth.oauth.MisfitAuthService;
 import it.unitn.introsde.ehealth.resource.misfit.MisfitActivityResource;
-import it.unitn.introsde.ehealth.resource.misfit.activity.MisfitActivitySummaryResource;
 import it.unitn.introsde.ehealth.resource.misfit.MisfitDeviceResource;
 import it.unitn.introsde.ehealth.resource.misfit.MisfitUserResource;
+import org.glassfish.jersey.client.oauth2.OAuth2ClientSupport;
 import org.glassfish.jersey.jackson.JacksonFeature;
 import org.glassfish.jersey.logging.LoggingFeature;
 
 import javax.ws.rs.Path;
 import javax.ws.rs.client.Client;
+import javax.ws.rs.client.ClientBuilder;
 import javax.ws.rs.client.WebTarget;
 import javax.ws.rs.core.*;
 import java.util.HashMap;
@@ -62,12 +66,23 @@ public class MisfitResource {
     }
 
     public static Response getResponse(UriInfo uriInfo, String targetPath, Map<String, String> queryParams) {
+        Client client = ClientBuilder.newClient();
+
         // Check access token
+        TokenModel tokenModel = TokenModel.find("user", "misfit");
+        if (tokenModel != null && tokenModel.getPrivateToken() != null) {
+            String accessToken = tokenModel.getPrivateToken();
+            MisfitAuthService.setAccessToken(accessToken);
+
+            Feature filterFeature = OAuth2ClientSupport.feature(accessToken);
+            client = client.register(filterFeature);
+
+            // MisfitAuthService.getFlow(OAUTH_URL, TOKEN_URL, OAUTH_SCOPE).refreshAccessToken(MisfitAuthService.getAccessToken());
+        }
         if (MisfitAuthService.getAccessToken() == null) {
             return MisfitAuthService.getAuthRedirectResponse(OAUTH_URL, TOKEN_URL, OAUTH_SCOPE, uriInfo);
         }
         // We have already an access token. Query the data from the API
-        Client client = MisfitAuthService.getFlow().getAuthorizedClient();
         return getAuthorizedResponse(client, uriInfo, targetPath, queryParams);
     }
 

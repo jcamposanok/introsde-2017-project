@@ -1,6 +1,7 @@
 package it.unitn.introsde.ehealth.resource.oauth;
 
 import java.net.URI;
+import java.time.Instant;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
@@ -10,6 +11,7 @@ import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriBuilder;
 import javax.ws.rs.core.UriInfo;
 
+import it.unitn.introsde.ehealth.model.TokenModel;
 import it.unitn.introsde.ehealth.oauth.MisfitAuthService;
 import org.glassfish.jersey.client.oauth2.OAuth2CodeGrantFlow;
 import org.glassfish.jersey.client.oauth2.TokenResult;
@@ -27,6 +29,13 @@ public class OAuth2Resource {
         TokenResult tokenResult = flow.finish(code, state);
 
         MisfitAuthService.setAccessToken(tokenResult.getAccessToken());
+
+        TokenModel token = new TokenModel()
+                .setUser("user")
+                .setProvider("misfit")
+                .setPrivateToken(tokenResult.getAccessToken())
+                .setTimestampCreated(Instant.now().toEpochMilli())
+                .create();
 
         // Authorization is finished -> now redirect back to the resource
         URI uri = UriBuilder.fromUri(uriInfo.getBaseUri()).path(redirectPath).build();

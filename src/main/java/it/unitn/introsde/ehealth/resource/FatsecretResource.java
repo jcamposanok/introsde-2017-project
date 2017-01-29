@@ -1,9 +1,11 @@
 package it.unitn.introsde.ehealth.resource;
 
 
+import com.github.scribejava.core.model.OAuth1AccessToken;
 import com.github.scribejava.core.model.OAuthRequest;
 import com.github.scribejava.core.model.Verb;
 import com.github.scribejava.core.oauth.OAuth10aService;
+import it.unitn.introsde.ehealth.model.TokenModel;
 import it.unitn.introsde.ehealth.oauth.FatsecretAuthService;
 import it.unitn.introsde.ehealth.resource.fatsecret.FatsecretFoodEntryResource;
 import org.glassfish.jersey.logging.LoggingFeature;
@@ -79,6 +81,13 @@ public class FatsecretResource {
     public static Response getResponse(UriInfo uriInfo, String method, Map<String, String> params, String format) {
         // Check access token
         String payload = "";
+
+        TokenModel tokenModel = TokenModel.find("user", "fatsecret");
+        if (tokenModel != null && tokenModel.getPublicToken() != null && tokenModel.getPrivateToken() != null) {
+            OAuth1AccessToken accessToken = new OAuth1AccessToken(tokenModel.getPublicToken(), tokenModel.getPrivateToken());
+            FatsecretAuthService.setAccessToken(accessToken);
+        }
+
         if (FatsecretAuthService.getAccessToken() == null) {
             try {
                 return FatsecretAuthService.getAuthRedirectResponse(uriInfo);
@@ -98,7 +107,7 @@ public class FatsecretResource {
             for (Map.Entry<String, String> p : params.entrySet()) {
                 request.addParameter(p.getKey(), p.getValue());
             }
-            service.signRequest(FatsecretAuthService.getAccessToken(), request); // the access token from step 4
+            service.signRequest(FatsecretAuthService.getAccessToken(), request);
             try {
                 final com.github.scribejava.core.model.Response serviceResponse = service.execute(request);
                 payload = serviceResponse.getBody();

@@ -1,7 +1,9 @@
 package it.unitn.introsde.ehealth.resource.oauth;
 
+import com.github.scribejava.core.extractors.OAuth1AccessTokenExtractor;
 import com.github.scribejava.core.model.OAuth1AccessToken;
 import com.github.scribejava.core.oauth.OAuth10aService;
+import it.unitn.introsde.ehealth.model.TokenModel;
 import it.unitn.introsde.ehealth.oauth.FatsecretAuthService;
 
 import javax.ws.rs.GET;
@@ -10,6 +12,7 @@ import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.*;
 import java.io.IOException;
 import java.net.URI;
+import java.time.Instant;
 import java.util.concurrent.ExecutionException;
 
 /**
@@ -25,6 +28,15 @@ public class OAuth1Resource {
             OAuth10aService flow = FatsecretAuthService.getFlow();
             final OAuth1AccessToken accessToken = flow.getAccessToken(FatsecretAuthService.getRequestToken(), verifier);
             FatsecretAuthService.setAccessToken(accessToken);
+
+            TokenModel token = new TokenModel()
+                    .setUser("user")
+                    .setProvider("fatsecret")
+                    .setPublicToken(accessToken.getToken())
+                    .setPrivateToken(accessToken.getTokenSecret())
+                    .setTimestampCreated(Instant.now().toEpochMilli())
+                    .create();
+
         } catch (IOException e) {
             e.printStackTrace();
         } catch (InterruptedException e) {
