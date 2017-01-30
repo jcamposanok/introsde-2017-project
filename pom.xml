@@ -5,11 +5,13 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>it.unitn.introsde</groupId>
-    <artifactId>introsdepro</artifactId>
+    <artifactId>introsde-2017-project</artifactId>
+    <packaging>pom</packaging>
     <version>1.0-SNAPSHOT</version>
 
     <modules>
-        <module>data</module>
-        <module>business</module>
+        <module>external</module>
+        <module>integration</module>
+        <module>presentation</module>
     </modules>
 </project>
