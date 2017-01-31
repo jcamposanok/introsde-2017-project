@@ -1,5 +1,6 @@
 package external.resource.misfit;
 
+import external.entity.misfit.MisfitDevice;
 import external.resource.MisfitResource;
 import external.oauth.MisfitAuthService;
 
@@ -25,9 +26,14 @@ public class MisfitDeviceResource {
     }
 
     @GET
-    @Produces(MediaType.APPLICATION_JSON)
+    @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
     public Response get() {
-        return MisfitResource.getResponse(uriInfo, API_ENDPOINT);
+        Response response =  MisfitResource.getResponse(uriInfo, API_ENDPOINT);
+        if (response.getStatus() == 200) {
+            MisfitDevice entity = response.readEntity(MisfitDevice.class);
+            return Response.ok(entity).build();
+        }
+        return response;
     }
 
 }

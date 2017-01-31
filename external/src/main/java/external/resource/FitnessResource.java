@@ -17,9 +17,9 @@ public class FitnessResource {
     @GET
     @Produces("text/html")
     public Response getStats() throws IOException {
-        fitness = GoogleAuthService.getFitnessService();
-        String fields = fitness.users().dataSources().list("me").getFields();
-        return Response.ok(fields).build();
+        // fitness = GoogleAuthService.getFitnessService();
+        // String fields = fitness.users().dataSources().list("me").getFields();
+        return Response.ok().build();
     }
 
 }

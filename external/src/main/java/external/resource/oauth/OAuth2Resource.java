@@ -11,7 +11,7 @@ import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriBuilder;
 import javax.ws.rs.core.UriInfo;
 
-import external.model.TokenModel;
+import external.entity.OAuthToken;
 import external.oauth.MisfitAuthService;
 import org.glassfish.jersey.client.oauth2.OAuth2CodeGrantFlow;
 import org.glassfish.jersey.client.oauth2.TokenResult;
@@ -30,7 +30,7 @@ public class OAuth2Resource {
 
         MisfitAuthService.setAccessToken(tokenResult.getAccessToken());
 
-        TokenModel token = new TokenModel()
+        OAuthToken token = new OAuthToken()
                 .setUser("user")
                 .setProvider("misfit")
                 .setPrivateToken(tokenResult.getAccessToken())

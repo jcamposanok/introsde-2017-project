@@ -26,10 +26,12 @@ public class ObjectFactory {
 
     private final static QName _GetUserNutritionResponse_QNAME = new QName("http://soap.server.integration/", "getUserNutritionResponse");
     private final static QName _GetUserActivityResponse_QNAME = new QName("http://soap.server.integration/", "getUserActivityResponse");
-    private final static QName _GetUserProfile_QNAME = new QName("http://soap.server.integration/", "getUserProfile");
-    private final static QName _GetUserProfileResponse_QNAME = new QName("http://soap.server.integration/", "getUserProfileResponse");
+    private final static QName _GetUserDevices_QNAME = new QName("http://soap.server.integration/", "getUserDevices");
+    private final static QName _Device_QNAME = new QName("http://soap.server.integration/", "device");
     private final static QName _GetUserNutrition_QNAME = new QName("http://soap.server.integration/", "getUserNutrition");
+    private final static QName _User_QNAME = new QName("http://soap.server.integration/", "user");
     private final static QName _GetUserActivity_QNAME = new QName("http://soap.server.integration/", "getUserActivity");
+    private final static QName _GetUserDevicesResponse_QNAME = new QName("http://soap.server.integration/", "getUserDevicesResponse");
 
     /**
      * Create a new ObjectFactory that can be used to create new instances of schema derived classes for package: presentation.binding
@@ -63,6 +65,30 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link GetUserDevicesResponse }
+     * 
+     */
+    public GetUserDevicesResponse createGetUserDevicesResponse() {
+        return new GetUserDevicesResponse();
+    }
+
+    /**
+     * Create an instance of {@link GetUserDevices }
+     * 
+     */
+    public GetUserDevices createGetUserDevices() {
+        return new GetUserDevices();
+    }
+
+    /**
+     * Create an instance of {@link Device }
+     * 
+     */
+    public Device createDevice() {
+        return new Device();
+    }
+
+    /**
      * Create an instance of {@link GetUserNutrition }
      * 
      */
@@ -71,27 +97,19 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link GetUserProfile }
+     * Create an instance of {@link User }
      * 
      */
-    public GetUserProfile createGetUserProfile() {
-        return new GetUserProfile();
+    public User createUser() {
+        return new User();
     }
 
     /**
-     * Create an instance of {@link GetUserProfileResponse }
+     * Create an instance of {@link UserDevicesResponse }
      * 
      */
-    public GetUserProfileResponse createGetUserProfileResponse() {
-        return new GetUserProfileResponse();
-    }
-
-    /**
-     * Create an instance of {@link UserProfileResponse }
-     * 
-     */
-    public UserProfileResponse createUserProfileResponse() {
-        return new UserProfileResponse();
+    public UserDevicesResponse createUserDevicesResponse() {
+        return new UserDevicesResponse();
     }
 
     /**
@@ -129,21 +147,21 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link GetUserProfile }{@code >}}
+     * Create an instance of {@link JAXBElement }{@code <}{@link GetUserDevices }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "http://soap.server.integration/", name = "getUserProfile")
-    public JAXBElement<GetUserProfile> createGetUserProfile(GetUserProfile value) {
-        return new JAXBElement<GetUserProfile>(_GetUserProfile_QNAME, GetUserProfile.class, null, value);
+    @XmlElementDecl(namespace = "http://soap.server.integration/", name = "getUserDevices")
+    public JAXBElement<GetUserDevices> createGetUserDevices(GetUserDevices value) {
+        return new JAXBElement<GetUserDevices>(_GetUserDevices_QNAME, GetUserDevices.class, null, value);
     }
 
     /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link GetUserProfileResponse }{@code >}}
+     * Create an instance of {@link JAXBElement }{@code <}{@link Device }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "http://soap.server.integration/", name = "getUserProfileResponse")
-    public JAXBElement<GetUserProfileResponse> createGetUserProfileResponse(GetUserProfileResponse value) {
-        return new JAXBElement<GetUserProfileResponse>(_GetUserProfileResponse_QNAME, GetUserProfileResponse.class, null, value);
+    @XmlElementDecl(namespace = "http://soap.server.integration/", name = "device")
+    public JAXBElement<Device> createDevice(Device value) {
+        return new JAXBElement<Device>(_Device_QNAME, Device.class, null, value);
     }
 
     /**
@@ -156,12 +174,30 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link User }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://soap.server.integration/", name = "user")
+    public JAXBElement<User> createUser(User value) {
+        return new JAXBElement<User>(_User_QNAME, User.class, null, value);
+    }
+
+    /**
      * Create an instance of {@link JAXBElement }{@code <}{@link GetUserActivity }{@code >}}
      * 
      */
     @XmlElementDecl(namespace = "http://soap.server.integration/", name = "getUserActivity")
     public JAXBElement<GetUserActivity> createGetUserActivity(GetUserActivity value) {
         return new JAXBElement<GetUserActivity>(_GetUserActivity_QNAME, GetUserActivity.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link GetUserDevicesResponse }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://soap.server.integration/", name = "getUserDevicesResponse")
+    public JAXBElement<GetUserDevicesResponse> createGetUserDevicesResponse(GetUserDevicesResponse value) {
+        return new JAXBElement<GetUserDevicesResponse>(_GetUserDevicesResponse_QNAME, GetUserDevicesResponse.class, null, value);
     }
 
 }

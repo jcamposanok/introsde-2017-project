@@ -2,8 +2,10 @@ package external.resource.oauth;
 
 import com.github.scribejava.core.model.OAuth1AccessToken;
 import com.github.scribejava.core.oauth.OAuth10aService;
-import external.model.TokenModel;
+import external.entity.OAuthToken;
 import external.oauth.FatsecretAuthService;
+import org.glassfish.jersey.client.oauth1.AccessToken;
+import org.glassfish.jersey.client.oauth1.OAuth1AuthorizationFlow;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
@@ -24,23 +26,25 @@ public class OAuth1Resource {
 
     private Response authorize(String verifier, String redirectPath) {
         try {
+            /*
             OAuth10aService flow = FatsecretAuthService.getFlow();
             final OAuth1AccessToken accessToken = flow.getAccessToken(FatsecretAuthService.getRequestToken(), verifier);
             FatsecretAuthService.setAccessToken(accessToken);
+*/
 
-            TokenModel token = new TokenModel()
+            OAuth1AuthorizationFlow flow = FatsecretAuthService.getFlow();
+            AccessToken accessToken = flow.finish(verifier);
+
+
+            OAuthToken token = new OAuthToken()
                     .setUser("user")
                     .setProvider("fatsecret")
                     .setPublicToken(accessToken.getToken())
-                    .setPrivateToken(accessToken.getTokenSecret())
+                    .setPrivateToken(accessToken.getAccessTokenSecret())
                     .setTimestampCreated(Instant.now().toEpochMilli())
                     .create();
 
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        } catch (ExecutionException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
         // Authorization is finished -> now redirect back to the resource

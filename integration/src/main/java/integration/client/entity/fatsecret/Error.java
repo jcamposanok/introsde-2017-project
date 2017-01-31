@@ -1,0 +1,80 @@
+
+package integration.client.entity.fatsecret;
+
+import javax.xml.bind.annotation.*;
+
+
+/**
+ * <p>Java class for anonymous complex type.
+ * 
+ * <p>The following schema fragment specifies the expected content contained within this class.
+ * 
+ * <pre>
+ * &lt;complexType>
+ *   &lt;complexContent>
+ *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
+ *       &lt;sequence>
+ *         &lt;element name="code" type="{http://platform.fatsecret.com/api/1.0/}code"/>
+ *         &lt;element name="message" type="{http://platform.fatsecret.com/api/1.0/}message"/>
+ *       &lt;/sequence>
+ *     &lt;/restriction>
+ *   &lt;/complexContent>
+ * &lt;/complexType>
+ * </pre>
+ * 
+ * 
+ */
+@XmlAccessorType(XmlAccessType.FIELD)
+@XmlType(name = "", propOrder = {
+    "code",
+    "message"
+})
+@XmlRootElement(name = "error", namespace = "http://platform.fatsecret.com/api/1.0/")
+public class Error {
+
+    @XmlElement(namespace = "http://platform.fatsecret.com/api/1.0/")
+    protected int code;
+    @XmlElement(namespace = "http://platform.fatsecret.com/api/1.0/", required = true)
+    protected String message;
+
+    /**
+     * Gets the value of the code property.
+     * 
+     */
+    public int getCode() {
+        return code;
+    }
+
+    /**
+     * Sets the value of the code property.
+     * 
+     */
+    public void setCode(int value) {
+        this.code = value;
+    }
+
+    /**
+     * Gets the value of the message property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
+     */
+    public String getMessage() {
+        return message;
+    }
+
+    /**
+     * Sets the value of the message property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
+     */
+    public void setMessage(String value) {
+        this.message = value;
+    }
+
+}

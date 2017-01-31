@@ -3,7 +3,7 @@
 
     <persistence-unit name="ExternalProviderPersistenceUnit">
         <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
-        <class>external.model.TokenModel</class>
+        <class>external.entity.OAuthToken</class>
         <properties>
             <property name="eclipselink.logging.level" value="INFO" />
             <property name="eclipselink.ddl-generation" value="create-or-extend-tables" />

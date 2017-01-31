@@ -1,7 +1,7 @@
 package external.resource;
 
 import external.resource.misfit.MisfitUserResource;
-import external.model.TokenModel;
+import external.entity.OAuthToken;
 import external.oauth.MisfitAuthService;
 import external.resource.misfit.MisfitActivityResource;
 import external.resource.misfit.MisfitDeviceResource;
@@ -67,9 +67,9 @@ public class MisfitResource {
         Client client = ClientBuilder.newClient();
 
         // Check access token
-        TokenModel tokenModel = TokenModel.find("user", "misfit");
-        if (tokenModel != null && tokenModel.getPrivateToken() != null) {
-            String accessToken = tokenModel.getPrivateToken();
+        OAuthToken token = OAuthToken.find("user", "misfit");
+        if (token != null && token.getPrivateToken() != null) {
+            String accessToken = token.getPrivateToken();
             MisfitAuthService.setAccessToken(accessToken);
 
             Feature filterFeature = OAuth2ClientSupport.feature(accessToken);
@@ -92,7 +92,7 @@ public class MisfitResource {
         for (Map.Entry<String, String> p : queryParams.entrySet()) {
             webTarget = webTarget.queryParam(p.getKey(), p.getValue());
         }
-        Response response = webTarget.request().get();
+        final Response response = webTarget.request().get();
 
         switch (response.getStatus()) {
             case 401: // Response.Status.UNAUTHORIZED

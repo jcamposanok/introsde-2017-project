@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>View Page</title>
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
+</head>
+<body>
+<div class="container">
+    <div class="page-header">
+        <h1>Hello, {{user.realName}}</h1>
+    </div>
+    <h2>Device list</h2>
+    <div class="well">
+        <ol class="list-group">
+            {{#devices}}
+            <li class="list-group-item">{{deviceType}}</li>
+            {{/devices}}
+        </ol>
+    </div>
+</div>
+</body>
+</html>

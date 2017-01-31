@@ -1,8 +1,8 @@
 package integration.server.soap;
 
 import integration.server.response.UserActivityResponse;
+import integration.server.response.UserDevicesResponse;
 import integration.server.response.UserNutritionResponse;
-import integration.server.response.UserProfileResponse;
 
 import javax.jws.WebMethod;
 import javax.jws.WebParam;
@@ -14,9 +14,9 @@ import javax.jws.soap.SOAPBinding;
 @SOAPBinding(style = SOAPBinding.Style.DOCUMENT)
 public interface EndpointInterface {
 
-    @WebMethod(operationName = "getUserProfile")
-    @WebResult(name = "profile")
-    public UserProfileResponse getUserProfile(@WebParam(name = "id") String id);
+    @WebMethod(operationName = "getUserDevices")
+    @WebResult(name = "devices")
+    public UserDevicesResponse getUserDevices(@WebParam(name = "id") String id);
 
     @WebMethod(operationName = "getUserActivity")
     @WebResult(name = "activity")

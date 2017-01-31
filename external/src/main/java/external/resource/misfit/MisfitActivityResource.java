@@ -1,7 +1,5 @@
 package external.resource.misfit;
 
-import external.resource.misfit.activity.MisfitActivityGoalsResource;
-import external.resource.misfit.activity.MisfitActivitySummaryResource;
 import external.oauth.MisfitAuthService;
 
 import javax.ws.rs.Path;

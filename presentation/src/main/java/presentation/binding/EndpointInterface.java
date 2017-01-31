@@ -28,29 +28,14 @@ public interface EndpointInterface {
      * 
      * @param id
      * @return
-     *     returns presentation.binding.UserProfileResponse
+     *     returns presentation.binding.UserDevicesResponse
      */
     @WebMethod
-    @WebResult(name = "profile", targetNamespace = "")
-    @RequestWrapper(localName = "getUserProfile", targetNamespace = "http://soap.server.integration/", className = "presentation.binding.GetUserProfile")
-    @ResponseWrapper(localName = "getUserProfileResponse", targetNamespace = "http://soap.server.integration/", className = "presentation.binding.GetUserProfileResponse")
-    @Action(input = "http://soap.server.integration/EndpointInterface/getUserProfileRequest", output = "http://soap.server.integration/EndpointInterface/getUserProfileResponse")
-    public UserProfileResponse getUserProfile(
-        @WebParam(name = "id", targetNamespace = "")
-        String id);
-
-    /**
-     * 
-     * @param id
-     * @return
-     *     returns presentation.binding.UserActivityResponse
-     */
-    @WebMethod
-    @WebResult(name = "activity", targetNamespace = "")
-    @RequestWrapper(localName = "getUserActivity", targetNamespace = "http://soap.server.integration/", className = "presentation.binding.GetUserActivity")
-    @ResponseWrapper(localName = "getUserActivityResponse", targetNamespace = "http://soap.server.integration/", className = "presentation.binding.GetUserActivityResponse")
-    @Action(input = "http://soap.server.integration/EndpointInterface/getUserActivityRequest", output = "http://soap.server.integration/EndpointInterface/getUserActivityResponse")
-    public UserActivityResponse getUserActivity(
+    @WebResult(name = "devices", targetNamespace = "")
+    @RequestWrapper(localName = "getUserDevices", targetNamespace = "http://soap.server.integration/", className = "presentation.binding.GetUserDevices")
+    @ResponseWrapper(localName = "getUserDevicesResponse", targetNamespace = "http://soap.server.integration/", className = "presentation.binding.GetUserDevicesResponse")
+    @Action(input = "http://soap.server.integration/EndpointInterface/getUserDevicesRequest", output = "http://soap.server.integration/EndpointInterface/getUserDevicesResponse")
+    public UserDevicesResponse getUserDevices(
         @WebParam(name = "id", targetNamespace = "")
         String id);
 
@@ -66,6 +51,21 @@ public interface EndpointInterface {
     @ResponseWrapper(localName = "getUserNutritionResponse", targetNamespace = "http://soap.server.integration/", className = "presentation.binding.GetUserNutritionResponse")
     @Action(input = "http://soap.server.integration/EndpointInterface/getUserNutritionRequest", output = "http://soap.server.integration/EndpointInterface/getUserNutritionResponse")
     public UserNutritionResponse getUserNutrition(
+        @WebParam(name = "id", targetNamespace = "")
+        String id);
+
+    /**
+     * 
+     * @param id
+     * @return
+     *     returns presentation.binding.UserActivityResponse
+     */
+    @WebMethod
+    @WebResult(name = "activity", targetNamespace = "")
+    @RequestWrapper(localName = "getUserActivity", targetNamespace = "http://soap.server.integration/", className = "presentation.binding.GetUserActivity")
+    @ResponseWrapper(localName = "getUserActivityResponse", targetNamespace = "http://soap.server.integration/", className = "presentation.binding.GetUserActivityResponse")
+    @Action(input = "http://soap.server.integration/EndpointInterface/getUserActivityRequest", output = "http://soap.server.integration/EndpointInterface/getUserActivityResponse")
+    public UserActivityResponse getUserActivity(
         @WebParam(name = "id", targetNamespace = "")
         String id);
 

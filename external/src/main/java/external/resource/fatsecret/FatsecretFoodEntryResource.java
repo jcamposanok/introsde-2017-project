@@ -1,13 +1,12 @@
 package external.resource.fatsecret;
 
+import external.entity.fatsecret.FoodEntries;
+import external.entity.fatsecret.FoodEntriesWrapper;
+import external.entity.fatsecret.FoodEntry;
 import external.oauth.FatsecretAuthService;
 import external.resource.FatsecretResource;
-import external.resource.fatsecret.foodentry.FatsecretFoodEntryMonthResource;
 
-import javax.ws.rs.GET;
-import javax.ws.rs.Path;
-import javax.ws.rs.Produces;
-import javax.ws.rs.QueryParam;
+import javax.ws.rs.*;
 import javax.ws.rs.core.*;
 import java.util.*;
 
@@ -34,8 +33,8 @@ public class FatsecretFoodEntryResource {
     }
 
     @GET
-    @Produces(MediaType.APPLICATION_JSON)
-    public Response get(@QueryParam("date") String date, @QueryParam("food_entry_id") String food_entry_id) {
+    @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
+    public Response get(@QueryParam("date") String date, @QueryParam("food_entry_id") String food_entry_id, @HeaderParam("Accept") String accept) {
         // Fatsecret API: You must specify EITHER date or food_entry_id
         Map<String, String> params = new HashMap<>();
         int dateDays = FatsecretResource.parseDaysCountFromDateString(date);
@@ -48,7 +47,19 @@ public class FatsecretFoodEntryResource {
         else {
             return Response.status(400).build();
         }
-        return FatsecretResource.getResponse(uriInfo, METHOD, params);
+        String format = FatsecretResource.getFormatStringFromHeader(accept);
+        Response response = FatsecretResource.getResponse(uriInfo, METHOD, params, format);
+        if (response.getStatus() == 200) {
+            if (accept.equals(MediaType.APPLICATION_JSON)) {
+                FoodEntriesWrapper entity = response.readEntity(FoodEntriesWrapper.class);
+                return Response.ok(entity).build();
+            }
+            else {
+                FoodEntry entity = response.readEntity(FoodEntry.class);
+                return Response.ok(entity).build();
+            }
+        }
+        return response;
     }
 
 }
