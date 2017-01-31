@@ -1,22 +1,105 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>View Page</title>
+    <title>Fitness Dashboard</title>
     <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
     <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
 </head>
 <body>
 <div class="container">
     <div class="page-header">
-        <h1>Hello, {{user.realName}}</h1>
+        <h1>Hello, {{user.realName}}!</h1>
     </div>
-    <h2>Device list</h2>
-    <div class="well">
-        <ol class="list-group">
-            {{#devices}}
-            <li class="list-group-item">{{deviceType}}</li>
-            {{/devices}}
-        </ol>
+
+    <div class="row">
+        <div class="col-sm-6">
+            <h2>My Devices</h2>
+            <div class="well">
+                <ol class="list-group">
+                    {{#devices}}
+                    <li class="list-group-item">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h3><p>{{deviceType}}</p></h3>
+                            </div>
+                            <div class="panel-body">
+                                <table class="table table-condensed">
+                                    <tbody>
+                                    <tr>
+                                        <td>Serial number</td>
+                                        <td>{{serialNumber}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Firmware version</td>
+                                        <td>{{firmwareVersion}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Battery level</td>
+                                        <td>{{batteryLevel}}&#37;</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Last sync</td>
+                                        <td>{{lastSyncDate}}</td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                    </li>
+                    {{/devices}}
+                </ol>
+            </div>
+        </div>
+        <div class="col-sm-6">
+            <h2>My Calories</h2>
+            <div class="well">
+                {{#summary}}
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <h3><p class="text-center">{{month}} {{year}}</p></h3>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-1"></div>
+                            <div class="col-sm-4">
+                                <div class="panel panel-danger">
+                                    <div class="panel-heading">
+                                        <p class="text-center">Calories gained</p>
+                                    </div>
+                                    <div class="panel-body">{{caloriesGained}}</div>
+                                </div>
+                            </div>
+                            <div class="col-sm-2"></div>
+                            <div class="col-sm-4">
+                                <div class="panel panel-success">
+                                    <div class="panel-heading">
+                                        <p class="text-center">Calories consumed</p>
+                                    </div>
+                                    <div class="panel-body">{{caloriesConsumed}}</div>
+                                </div>
+                            </div>
+                            <div class="col-sm-1"></div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-1"></div>
+                            <div class="col-sm-12">
+                                <div class="panel panel-{{resultClass}}">
+                                    <div class="panel-heading">
+                                        <p class="text-center">Total balance: {{result}}</p>
+                                    </div>
+                                    <div class="panel-body">{{message}}</div>
+                                </div>
+                            </div>
+                            <div class="col-sm-1"></div>
+                        </div>
+                    </div>
+                </div>
+                {{/summary}}
+            </div>
+        </div>
     </div>
 </div>
 </body>

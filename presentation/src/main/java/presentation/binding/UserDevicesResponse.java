@@ -31,7 +31,7 @@ import javax.xml.bind.annotation.XmlType;
 })
 public class UserDevicesResponse {
 
-    protected User response;
+    public User response;
 
     /**
      * Gets the value of the response property.

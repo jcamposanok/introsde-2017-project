@@ -4,59 +4,40 @@
 <xsd:import namespace="http://soap.server.integration/" schemaLocation="http://localhost:8080/introsde/integration/ws?xsd=1"/>
 </xsd:schema>
 </types>
+<message name="getUserCalories">
+<part name="parameters" element="tns:getUserCalories"/>
+</message>
+<message name="getUserCaloriesResponse">
+<part name="parameters" element="tns:getUserCaloriesResponse"/>
+</message>
 <message name="getUserDevices">
 <part name="parameters" element="tns:getUserDevices"/>
 </message>
 <message name="getUserDevicesResponse">
 <part name="parameters" element="tns:getUserDevicesResponse"/>
 </message>
-<message name="getUserNutrition">
-<part name="parameters" element="tns:getUserNutrition"/>
-</message>
-<message name="getUserNutritionResponse">
-<part name="parameters" element="tns:getUserNutritionResponse"/>
-</message>
-<message name="getUserActivity">
-<part name="parameters" element="tns:getUserActivity"/>
-</message>
-<message name="getUserActivityResponse">
-<part name="parameters" element="tns:getUserActivityResponse"/>
-</message>
 <portType name="EndpointInterface">
+<operation name="getUserCalories">
+<input wsam:Action="http://soap.server.integration/EndpointInterface/getUserCaloriesRequest" message="tns:getUserCalories"/>
+<output wsam:Action="http://soap.server.integration/EndpointInterface/getUserCaloriesResponse" message="tns:getUserCaloriesResponse"/>
+</operation>
 <operation name="getUserDevices">
 <input wsam:Action="http://soap.server.integration/EndpointInterface/getUserDevicesRequest" message="tns:getUserDevices"/>
 <output wsam:Action="http://soap.server.integration/EndpointInterface/getUserDevicesResponse" message="tns:getUserDevicesResponse"/>
 </operation>
-<operation name="getUserNutrition">
-<input wsam:Action="http://soap.server.integration/EndpointInterface/getUserNutritionRequest" message="tns:getUserNutrition"/>
-<output wsam:Action="http://soap.server.integration/EndpointInterface/getUserNutritionResponse" message="tns:getUserNutritionResponse"/>
-</operation>
-<operation name="getUserActivity">
-<input wsam:Action="http://soap.server.integration/EndpointInterface/getUserActivityRequest" message="tns:getUserActivity"/>
-<output wsam:Action="http://soap.server.integration/EndpointInterface/getUserActivityResponse" message="tns:getUserActivityResponse"/>
-</operation>
 </portType>
 <binding name="EndpointPortBinding" type="tns:EndpointInterface">
 <soap:binding transport="http://schemas.xmlsoap.org/soap/http" style="document"/>
+<operation name="getUserCalories">
+<soap:operation soapAction=""/>
+<input>
+<soap:body use="literal"/>
+</input>
+<output>
+<soap:body use="literal"/>
+</output>
+</operation>
 <operation name="getUserDevices">
-<soap:operation soapAction=""/>
-<input>
-<soap:body use="literal"/>
-</input>
-<output>
-<soap:body use="literal"/>
-</output>
-</operation>
-<operation name="getUserNutrition">
-<soap:operation soapAction=""/>
-<input>
-<soap:body use="literal"/>
-</input>
-<output>
-<soap:body use="literal"/>
-</output>
-</operation>
-<operation name="getUserActivity">
 <soap:operation soapAction=""/>
 <input>
 <soap:body use="literal"/>

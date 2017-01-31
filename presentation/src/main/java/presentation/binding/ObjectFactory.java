@@ -24,13 +24,11 @@ import javax.xml.namespace.QName;
 @XmlRegistry
 public class ObjectFactory {
 
-    private final static QName _GetUserNutritionResponse_QNAME = new QName("http://soap.server.integration/", "getUserNutritionResponse");
-    private final static QName _GetUserActivityResponse_QNAME = new QName("http://soap.server.integration/", "getUserActivityResponse");
     private final static QName _GetUserDevices_QNAME = new QName("http://soap.server.integration/", "getUserDevices");
     private final static QName _Device_QNAME = new QName("http://soap.server.integration/", "device");
-    private final static QName _GetUserNutrition_QNAME = new QName("http://soap.server.integration/", "getUserNutrition");
+    private final static QName _GetUserCalories_QNAME = new QName("http://soap.server.integration/", "getUserCalories");
     private final static QName _User_QNAME = new QName("http://soap.server.integration/", "user");
-    private final static QName _GetUserActivity_QNAME = new QName("http://soap.server.integration/", "getUserActivity");
+    private final static QName _GetUserCaloriesResponse_QNAME = new QName("http://soap.server.integration/", "getUserCaloriesResponse");
     private final static QName _GetUserDevicesResponse_QNAME = new QName("http://soap.server.integration/", "getUserDevicesResponse");
 
     /**
@@ -41,35 +39,19 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link GetUserActivityResponse }
-     * 
-     */
-    public GetUserActivityResponse createGetUserActivityResponse() {
-        return new GetUserActivityResponse();
-    }
-
-    /**
-     * Create an instance of {@link GetUserNutritionResponse }
-     * 
-     */
-    public GetUserNutritionResponse createGetUserNutritionResponse() {
-        return new GetUserNutritionResponse();
-    }
-
-    /**
-     * Create an instance of {@link GetUserActivity }
-     * 
-     */
-    public GetUserActivity createGetUserActivity() {
-        return new GetUserActivity();
-    }
-
-    /**
      * Create an instance of {@link GetUserDevicesResponse }
      * 
      */
     public GetUserDevicesResponse createGetUserDevicesResponse() {
         return new GetUserDevicesResponse();
+    }
+
+    /**
+     * Create an instance of {@link GetUserCaloriesResponse }
+     * 
+     */
+    public GetUserCaloriesResponse createGetUserCaloriesResponse() {
+        return new GetUserCaloriesResponse();
     }
 
     /**
@@ -89,11 +71,11 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link GetUserNutrition }
+     * Create an instance of {@link GetUserCalories }
      * 
      */
-    public GetUserNutrition createGetUserNutrition() {
-        return new GetUserNutrition();
+    public GetUserCalories createGetUserCalories() {
+        return new GetUserCalories();
     }
 
     /**
@@ -105,45 +87,19 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link UserCaloriesResponse }
+     * 
+     */
+    public UserCaloriesResponse createUserCaloriesResponse() {
+        return new UserCaloriesResponse();
+    }
+
+    /**
      * Create an instance of {@link UserDevicesResponse }
      * 
      */
     public UserDevicesResponse createUserDevicesResponse() {
         return new UserDevicesResponse();
-    }
-
-    /**
-     * Create an instance of {@link UserActivityResponse }
-     * 
-     */
-    public UserActivityResponse createUserActivityResponse() {
-        return new UserActivityResponse();
-    }
-
-    /**
-     * Create an instance of {@link UserNutritionResponse }
-     * 
-     */
-    public UserNutritionResponse createUserNutritionResponse() {
-        return new UserNutritionResponse();
-    }
-
-    /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link GetUserNutritionResponse }{@code >}}
-     * 
-     */
-    @XmlElementDecl(namespace = "http://soap.server.integration/", name = "getUserNutritionResponse")
-    public JAXBElement<GetUserNutritionResponse> createGetUserNutritionResponse(GetUserNutritionResponse value) {
-        return new JAXBElement<GetUserNutritionResponse>(_GetUserNutritionResponse_QNAME, GetUserNutritionResponse.class, null, value);
-    }
-
-    /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link GetUserActivityResponse }{@code >}}
-     * 
-     */
-    @XmlElementDecl(namespace = "http://soap.server.integration/", name = "getUserActivityResponse")
-    public JAXBElement<GetUserActivityResponse> createGetUserActivityResponse(GetUserActivityResponse value) {
-        return new JAXBElement<GetUserActivityResponse>(_GetUserActivityResponse_QNAME, GetUserActivityResponse.class, null, value);
     }
 
     /**
@@ -165,12 +121,12 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link GetUserNutrition }{@code >}}
+     * Create an instance of {@link JAXBElement }{@code <}{@link GetUserCalories }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "http://soap.server.integration/", name = "getUserNutrition")
-    public JAXBElement<GetUserNutrition> createGetUserNutrition(GetUserNutrition value) {
-        return new JAXBElement<GetUserNutrition>(_GetUserNutrition_QNAME, GetUserNutrition.class, null, value);
+    @XmlElementDecl(namespace = "http://soap.server.integration/", name = "getUserCalories")
+    public JAXBElement<GetUserCalories> createGetUserCalories(GetUserCalories value) {
+        return new JAXBElement<GetUserCalories>(_GetUserCalories_QNAME, GetUserCalories.class, null, value);
     }
 
     /**
@@ -183,12 +139,12 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link GetUserActivity }{@code >}}
+     * Create an instance of {@link JAXBElement }{@code <}{@link GetUserCaloriesResponse }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "http://soap.server.integration/", name = "getUserActivity")
-    public JAXBElement<GetUserActivity> createGetUserActivity(GetUserActivity value) {
-        return new JAXBElement<GetUserActivity>(_GetUserActivity_QNAME, GetUserActivity.class, null, value);
+    @XmlElementDecl(namespace = "http://soap.server.integration/", name = "getUserCaloriesResponse")
+    public JAXBElement<GetUserCaloriesResponse> createGetUserCaloriesResponse(GetUserCaloriesResponse value) {
+        return new JAXBElement<GetUserCaloriesResponse>(_GetUserCaloriesResponse_QNAME, GetUserCaloriesResponse.class, null, value);
     }
 
     /**

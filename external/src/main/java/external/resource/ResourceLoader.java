@@ -38,10 +38,7 @@ public class ResourceLoader extends ResourceConfig {
         register(MisfitActivitySummaryResource.class); // misfit/activity/summary [start, end]
         register(MisfitActivityGoalsResource.class); // misfit/activity/goals [start, end]
 
-        // register(MustacheMvcFeature.class);
-        // property(MustacheMvcFeature.TEMPLATE_BASE_PATH, "/templates");
-
-        register(new LoggingFeature(Logger.getLogger("application.server"), LoggingFeature.Verbosity.PAYLOAD_ANY));
+        register(new LoggingFeature(Logger.getLogger("external.server"), LoggingFeature.Verbosity.PAYLOAD_ANY));
     }
 
 }

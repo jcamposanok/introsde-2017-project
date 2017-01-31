@@ -47,13 +47,13 @@ import javax.xml.datatype.XMLGregorianCalendar;
 public class User {
 
     @XmlSchemaType(name = "dateTime")
-    protected XMLGregorianCalendar birthdate;
+    public XMLGregorianCalendar birthdate;
     @XmlElement(nillable = true)
-    protected List<Device> deviceList;
-    protected Double height;
+    public List<Device> deviceList;
+    public Double height;
     public String realName;
-    protected int userId;
-    protected Double weight;
+    public int userId;
+    public Double weight;
 
     /**
      * Gets the value of the birthdate property.

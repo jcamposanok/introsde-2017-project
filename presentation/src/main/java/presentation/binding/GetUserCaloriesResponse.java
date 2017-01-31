@@ -7,16 +7,16 @@ import javax.xml.bind.annotation.XmlType;
 
 
 /**
- * <p>Java class for getUserActivityResponse complex type.
+ * <p>Java class for getUserCaloriesResponse complex type.
  * 
  * <p>The following schema fragment specifies the expected content contained within this class.
  * 
  * <pre>
- * &lt;complexType name="getUserActivityResponse">
+ * &lt;complexType name="getUserCaloriesResponse">
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
- *         &lt;element name="activity" type="{http://soap.server.integration/}userActivityResponse" minOccurs="0"/>
+ *         &lt;element name="calories" type="{http://soap.server.integration/}userCaloriesResponse" minOccurs="0"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
  *   &lt;/complexContent>
@@ -26,35 +26,35 @@ import javax.xml.bind.annotation.XmlType;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "getUserActivityResponse", propOrder = {
-    "activity"
+@XmlType(name = "getUserCaloriesResponse", propOrder = {
+    "calories"
 })
-public class GetUserActivityResponse {
+public class GetUserCaloriesResponse {
 
-    protected UserActivityResponse activity;
+    protected UserCaloriesResponse calories;
 
     /**
-     * Gets the value of the activity property.
+     * Gets the value of the calories property.
      * 
      * @return
      *     possible object is
-     *     {@link UserActivityResponse }
+     *     {@link UserCaloriesResponse }
      *     
      */
-    public UserActivityResponse getActivity() {
-        return activity;
+    public UserCaloriesResponse getCalories() {
+        return calories;
     }
 
     /**
-     * Sets the value of the activity property.
+     * Sets the value of the calories property.
      * 
      * @param value
      *     allowed object is
-     *     {@link UserActivityResponse }
+     *     {@link UserCaloriesResponse }
      *     
      */
-    public void setActivity(UserActivityResponse value) {
-        this.activity = value;
+    public void setCalories(UserCaloriesResponse value) {
+        this.calories = value;
     }
 
 }

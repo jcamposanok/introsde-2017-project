@@ -7,6 +7,8 @@ import javax.xml.bind.annotation.XmlElement;
 
 public class UserDevicesResponse {
 
+    private User response;
+
     @XmlElement(name = "response")
     public User getResponse() {
         return response;
@@ -15,7 +17,5 @@ public class UserDevicesResponse {
     public void setResponse(User response) {
         this.response = response;
     }
-
-    private User response;
 
 }

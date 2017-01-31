@@ -49,7 +49,7 @@ public class RestClient {
     public static Response get(String path, String mediaType, Map<String, Object> params) {
         WebTarget target = service.path(path);
         for (Map.Entry<String, Object> entry : params.entrySet()) {
-            target.queryParam(entry.getKey(), entry.getValue());
+            target = target.queryParam(entry.getKey(), entry.getValue());
         }
         Response res = target.request(mediaType).accept(mediaType).get();
         res.bufferEntity(); // To use readEntity multiple times

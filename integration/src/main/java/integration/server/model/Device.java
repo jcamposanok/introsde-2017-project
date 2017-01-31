@@ -28,6 +28,14 @@ public class Device implements Serializable {
     @Column(name = "deviceType")
     private String deviceType;
 
+    private int batteryLevel;
+
+    private String serialNumber;
+
+    private String firmwareVersion;
+
+    private String lastSyncDate;
+
 
     public int getDeviceId() {
         return deviceId;
@@ -53,4 +61,35 @@ public class Device implements Serializable {
         this.deviceType = deviceType;
     }
 
+    public int getBatteryLevel() {
+        return batteryLevel;
+    }
+
+    public void setBatteryLevel(int batteryLevel) {
+        this.batteryLevel = batteryLevel;
+    }
+
+    public String getSerialNumber() {
+        return serialNumber;
+    }
+
+    public void setSerialNumber(String serialNumber) {
+        this.serialNumber = serialNumber;
+    }
+
+    public String getFirmwareVersion() {
+        return firmwareVersion;
+    }
+
+    public void setFirmwareVersion(String firmwareVersion) {
+        this.firmwareVersion = firmwareVersion;
+    }
+
+    public String getLastSyncDate() {
+        return lastSyncDate;
+    }
+
+    public void setLastSyncDate(String lastSyncDate) {
+        this.lastSyncDate = lastSyncDate;
+    }
 }

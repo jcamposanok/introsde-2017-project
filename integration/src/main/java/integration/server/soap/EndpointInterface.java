@@ -1,8 +1,7 @@
 package integration.server.soap;
 
-import integration.server.response.UserActivityResponse;
+import integration.server.response.UserCaloriesResponse;
 import integration.server.response.UserDevicesResponse;
-import integration.server.response.UserNutritionResponse;
 
 import javax.jws.WebMethod;
 import javax.jws.WebParam;
@@ -18,12 +17,8 @@ public interface EndpointInterface {
     @WebResult(name = "devices")
     public UserDevicesResponse getUserDevices(@WebParam(name = "id") String id);
 
-    @WebMethod(operationName = "getUserActivity")
-    @WebResult(name = "activity")
-    public UserActivityResponse getUserActivity(@WebParam(name = "id") String id);
-
-    @WebMethod(operationName = "getUserNutrition")
-    @WebResult(name = "nutrition")
-    public UserNutritionResponse getUserNutrition(@WebParam(name = "id") String id);
+    @WebMethod(operationName = "getUserCalories")
+    @WebResult(name = "calories")
+    public UserCaloriesResponse getUserCalories(@WebParam(name = "id") String id, @WebParam(name = "year") String year, @WebParam(name = "month") String month);
 
 }
