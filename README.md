@@ -31,9 +31,12 @@ The following table summarizes the REST services supported by
 the external layer. All the paths indicated are relative to the API endpoint (e.g. http://introsde-jcamposanok-e.herokuapp.com/api/). 
  The return format (i.e. “application/json” or “application/xml”) must be specified through the “Accept” header in the request.
 
-> **Legend:** \
-> []: parameters \
-> ?: optional \
+> **Legend:**
+>
+> []: parameters
+>
+> ?: optional
+>
 > ()+: either one or the other, but not both
 
 Service | Description
