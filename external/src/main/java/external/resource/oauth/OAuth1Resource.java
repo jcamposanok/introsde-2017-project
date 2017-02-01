@@ -11,10 +11,8 @@ import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.*;
-import java.io.IOException;
 import java.net.URI;
 import java.time.Instant;
-import java.util.concurrent.ExecutionException;
 
 /**
  * User will be redirected back to this resource after he/she grants access to our application.
@@ -26,23 +24,23 @@ public class OAuth1Resource {
 
     private Response authorize(String verifier, String redirectPath) {
         try {
-            /*
-            OAuth10aService flow = FatsecretAuthService.getFlow();
-            final OAuth1AccessToken accessToken = flow.getAccessToken(FatsecretAuthService.getRequestToken(), verifier);
-            FatsecretAuthService.setAccessToken(accessToken);
-*/
 
+            OAuth10aService authFlow = FatsecretAuthService.getService();
+            final OAuth1AccessToken accessToken = authFlow.getAccessToken(FatsecretAuthService.getRequestToken(), verifier);
+            FatsecretAuthService.setAccessToken(accessToken);
+
+            /*
             OAuth1AuthorizationFlow flow = FatsecretAuthService.getFlow();
             AccessToken accessToken = flow.finish(verifier);
+            */
 
-
-            OAuthToken token = new OAuthToken()
-                    .setUser("user")
-                    .setProvider("fatsecret")
-                    .setPublicToken(accessToken.getToken())
-                    .setPrivateToken(accessToken.getAccessTokenSecret())
-                    .setTimestampCreated(Instant.now().toEpochMilli())
-                    .create();
+            OAuthToken token = new OAuthToken();
+            token.setUserId("user"); // TODO: Implement different users
+            token.setProvider("fatsecret");
+            token.setPublicToken(accessToken.getToken());
+            token.setPrivateToken(accessToken.getTokenSecret());
+            token.setTimestampCreated(Instant.now().toEpochMilli());
+            token.create();
 
         } catch (Exception e) {
             e.printStackTrace();

@@ -30,12 +30,12 @@ public class OAuth2Resource {
 
         MisfitAuthService.setAccessToken(tokenResult.getAccessToken());
 
-        OAuthToken token = new OAuthToken()
-                .setUser("user")
-                .setProvider("misfit")
-                .setPrivateToken(tokenResult.getAccessToken())
-                .setTimestampCreated(Instant.now().toEpochMilli())
-                .create();
+        OAuthToken token = new OAuthToken();
+        token.setUserId("user"); // TODO: Implement different users
+        token.setProvider("misfit");
+        token.setPrivateToken(tokenResult.getAccessToken());
+        token.setTimestampCreated(Instant.now().toEpochMilli());
+        token.create();
 
         // Authorization is finished -> now redirect back to the resource
         URI uri = UriBuilder.fromUri(uriInfo.getBaseUri()).path(redirectPath).build();

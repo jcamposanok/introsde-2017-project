@@ -120,7 +120,7 @@ public class FatsecretResource {
             FatsecretAuthService.setAccessToken(accessToken);
         }
 
-        if (FatsecretAuthService.getAccessToken() == null) {
+        if (FatsecretAuthService.getAccessToken() == null || tokenModel == null || tokenModel.getPublicToken() == null || tokenModel.getPrivateToken() == null) {
             try {
                 return FatsecretAuthService.getAuthRedirectResponse(uriInfo);
             } catch (Exception e) {
@@ -129,7 +129,6 @@ public class FatsecretResource {
         }
 
         AccessToken accessToken = new AccessToken(tokenModel.getPublicToken(), tokenModel.getPrivateToken());
-
         Feature filterFeature = OAuth1ClientSupport
                 .builder(FatsecretAuthService.getConsumerCredentials())
                 .feature()

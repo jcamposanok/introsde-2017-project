@@ -98,14 +98,22 @@ public class FatsecretAuthService extends ExternalProviderAuthService {
         String callbackUri = UriBuilder
                 .fromUri(uriInfo.getBaseUri())
                 .path(REDIRECT_PATH).path(apiName).path(resourceName).build().toString();
-/*
-        flow = getFlow(callbackUri);
 
-        requestToken = flow.getRequestToken();
-        final String authorizationUri = flow.getAuthorizationUrl(requestToken);
-*/
+        OAuth10aService authFlow = new ServiceBuilder()
+                .apiKey(CONSUMER_KEY)
+                .apiSecret(CONSUMER_SECRET)
+                .callback(callbackUri)
+                .signatureType(SignatureType.QueryString)
+                .build(FatsecretApi.instance());
 
-        final String authorizationUri = flow.start();
+        String authorizationUri;
+        try {
+            requestToken = authFlow.getRequestToken();
+            authorizationUri = authFlow.getAuthorizationUrl(requestToken);
+        }
+        catch (Exception e) {
+            authorizationUri = flow.start();
+        }
 
         // redirect user to authorization URI
         return Response.seeOther(UriBuilder.fromUri(authorizationUri).build()).build();

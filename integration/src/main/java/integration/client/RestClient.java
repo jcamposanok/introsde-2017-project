@@ -26,12 +26,15 @@ public class RestClient {
     }
 
     public static String getDataApi() {
+        String env = System.getenv("ENV");  // This has to be configured in Heroku vars
+
         if (dataApi == "") {
             Properties props = new Properties();
             URL propFileUrl = Endpoint.class.getClassLoader().getResource("project.properties");
             try {
                 props.load(propFileUrl.openStream());
-                dataApi = props.getProperty("project.data.api");
+                String environmentName = (env == "" | env == null) ? "local" : env;
+                dataApi = props.getProperty("project.data.api" + "." + environmentName);
             } catch (IOException e) {
                 e.printStackTrace();
                 dataApi = "";

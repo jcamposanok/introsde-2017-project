@@ -1,8 +1,10 @@
 
 package presentation.binding;
 
+import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.Properties;
 import javax.xml.namespace.QName;
 import javax.xml.ws.Service;
 import javax.xml.ws.WebEndpoint;
@@ -30,7 +32,19 @@ public class BusinessLogicService
         URL url = null;
         WebServiceException e = null;
         try {
-            url = new URL("http://localhost:8080/introsde/integration/ws?wsdl");
+            String env = System.getenv("ENV");  // This has to be configured in Heroku vars
+            Properties props = new Properties();
+            URL propFileUrl = BusinessLogicService.class.getClassLoader().getResource("project.properties");
+            String urlString;
+            try {
+                props.load(propFileUrl.openStream());
+                String environmentName = (env == "" | env == null) ? "local" : env;
+                urlString = props.getProperty("project.integration.wsdl" + "." + environmentName);
+            } catch (IOException ex) {
+                ex.printStackTrace();
+                urlString = "";
+            }
+            url = new URL(urlString);
         } catch (MalformedURLException ex) {
             e = new WebServiceException(ex);
         }

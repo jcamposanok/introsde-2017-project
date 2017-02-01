@@ -28,7 +28,7 @@ public class ExternalProviderDao implements ServletContextListener {
 
     @Override
     public void contextInitialized(ServletContextEvent event) {
-        String databaseUrl = System.getenv("DATABASE_URL");  // This is available in Heroku
+        String databaseUrl = System.getenv("DATABASE_URL");  // This is available in Heroku after provisioning a database
 
         // Read the properties file to get the base directory and db path
         if (databaseUrl == null) {

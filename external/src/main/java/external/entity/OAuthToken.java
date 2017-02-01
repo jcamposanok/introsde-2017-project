@@ -5,9 +5,7 @@ import external.dao.ExternalProviderDao;
 
 import javax.persistence.*;
 import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlRegistry;
 import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
 import java.io.Serializable;
 import java.util.List;
 
@@ -17,12 +15,10 @@ import java.util.List;
         @NamedQuery(
                 name="OAuthToken.find",
                 query="SELECT t FROM OAuthToken t " +
-                        "WHERE t.user = :user AND t.provider = :provider " +
-                        "ORDER BY t.timestampCreated DESC"
+                        "WHERE t.user_id = :user_id AND t.provider = :provider " +
+                        "ORDER BY t.timestamp_created DESC"
         )
 })
-@XmlRootElement
-@JsonIgnoreProperties(ignoreUnknown = true)
 public class OAuthToken implements Serializable {
 
     @Id
@@ -34,94 +30,81 @@ public class OAuthToken implements Serializable {
             valueColumnName = "seq",
             initialValue = 1,
             allocationSize = 100)
-    private int tokenId;
+    private int token_id;
 
-    @Column(name = "user")
-    private String user;
+    @Column(name = "user_id")
+    private String user_id;
 
     @Column(name = "provider")
     private String provider;
 
-    @Column(name = "publicToken")
-    private String publicToken;
+    @Column(name = "public_token")
+    private String public_token;
 
-    @Column(name = "privateToken")
-    private String privateToken;
+    @Column(name = "private_token")
+    private String private_token;
 
-    @Column(name = "timestampCreated")
-    private long timestampCreated;
+    @Column(name = "timestamp_created")
+    private long timestamp_created;
 
     // empty constructor needed for deserialization by JAXB
     public OAuthToken() {
     }
 
-    @XmlElement
     public int getTokenId() {
-        return tokenId;
+        return token_id;
     }
 
-    public OAuthToken setTokenId(int tokenId) {
-        this.tokenId = tokenId;
-        return this;
+    public void setTokenId(int token_id) {
+        this.token_id = token_id;
     }
 
-    @XmlElement
-    public String getUser() {
-        return user;
+    public String getUserId() {
+        return user_id;
     }
 
-    public OAuthToken setUser(String user) {
-        this.user = user;
-        return this;
+    public void setUserId(String user_id) {
+        this.user_id = user_id;
     }
 
-    @XmlElement
     public String getProvider() {
         return provider;
     }
 
-    public OAuthToken setProvider(String provider) {
+    public void setProvider(String provider) {
         this.provider = provider;
-        return this;
     }
 
-    @XmlElement
     public String getPublicToken() {
-        return publicToken;
+        return public_token;
     }
 
-    public OAuthToken setPublicToken(String publicToken) {
-        this.publicToken = publicToken;
-        return this;
+    public void setPublicToken(String public_token) {
+        this.public_token = public_token;
     }
 
-    @XmlElement
     public String getPrivateToken() {
-        return privateToken;
+        return private_token;
     }
 
-    public OAuthToken setPrivateToken(String privateToken) {
-        this.privateToken = privateToken;
-        return this;
+    public void setPrivateToken(String private_token) {
+        this.private_token = private_token;
     }
 
-    @XmlElement
     public long getTimestampCreated() {
-        return timestampCreated;
+        return timestamp_created;
     }
 
-    public OAuthToken setTimestampCreated(long timestampCreated) {
-        this.timestampCreated = timestampCreated;
-        return this;
+    public void setTimestampCreated(long timestamp_created) {
+        this.timestamp_created = timestamp_created;
     }
-
 
     public static OAuthToken find(String user, String provider) {
         OAuthToken entity = null;
         EntityManager em = ExternalProviderDao.createEntityManager();
         if (em != null) {
             List<OAuthToken> resultList = em.createNamedQuery("OAuthToken.find")
-                    .setParameter("user", user)
+                    .setParameter("user_id", user)
                     .setParameter("provider", provider)
                     .getResultList();
             if (resultList != null && resultList.size() > 0) {

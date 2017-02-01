@@ -143,6 +143,13 @@
             <version>${sqlite.version}</version>
         </dependency>
 
+        <!-- postgresql -->
+        <dependency>
+            <groupId>org.postgresql</groupId>
+            <artifactId>postgresql</artifactId>
+            <version>${postgresql.version}</version>
+        </dependency>
+
         <!-- eclipselink -->
         <dependency>
             <groupId>org.eclipse.persistence</groupId>
@@ -206,7 +213,7 @@
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-war-plugin</artifactId>
                 <configuration>
-                    <webXml>src\web\WEB-INF\web.xml</webXml>
+                    <webXml>web\WEB-INF\web.xml</webXml>
                 </configuration>
             </plugin>
         </plugins>
