@@ -77,6 +77,6 @@ You can access a live version of the dashboard at the following URL:
 
 - https://introsde-jcamposanok-p.herokuapp.com/dashboard
 
-Optionally, you can specify to view the results for a particular month by appending the folowing parameters to the path: “/year/{yyyy}/month/{MM}”, for example:
+Optionally, you can specify to view the results for a particular month by appending the following parameters to the path: “/year/{yyyy}/month/{MM}”, for example:
 
 - https://introsde-jcamposanok-p.herokuapp.com/dashboard/year/2017/month/01 
