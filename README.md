@@ -18,7 +18,10 @@ two external providers: **Fatsecret**, a food and diet managing app; and **Misfi
 
 For authentication purposes, Fatsecret and Misfit require the use of OAuth 
 v1.0 and v2.0, respectively. Therefore, local credential management had to 
-be implemented at this level, in order to query and retrieve the necessary data. The OAuth v1.0 authentication is performed with the Scribe Java library, while OAuth v2.0 uses the Jersey 2 OAuth client implementation. Both mechanisms provide an authentication token which is stored locally for future use. In a local installation, SQLite will be used as default storage engine, but once deployed to Heroku, the code will automatically detect the appropriate system environment variables and switch to Postgres.
+be implemented at this level, in order to query and retrieve the necessary data. 
+The OAuth v1.0 authentication is performed with the Scribe Java library, 
+while OAuth v2.0 uses the Jersey 2 OAuth client implementation. Both mechanisms provide 
+an __authentication token__ which is stored locally for future use. In a local installation, SQLite will be used as default storage engine, but once deployed to Heroku, the code will automatically detect the appropriate system environment variables and switch to Postgres.
 
 Another advantage provided by this layer is that it can translate 
 the original JSON-only or XML-only APIs of the external providers into any 
@@ -29,7 +32,8 @@ the JSON/XML into Java code and vice-versa.
 
 The following table summarizes the REST services supported by 
 the external layer. All the paths indicated are relative to the API endpoint (e.g. http://introsde-jcamposanok-e.herokuapp.com/api/). 
- The return format (i.e. “application/json” or “application/xml”) must be specified through the “Accept” header in the request.
+ The return format (i.e. _“application/json”_ or _“application/xml”_) 
+ must be specified through the _“Accept”_ header in the request.
 
 > **Legend:**
 >
@@ -41,11 +45,11 @@ the external layer. All the paths indicated are relative to the API endpoint (e.
 
 Service | Description
 --------|------------
-fatsecret/food-diary/month [date?] | Shows a summary of the nutritional information for an entire month. If date is not specified, the current month is taken by default
-fatsecret/food-diary [(date, food_entry_id)+] | Shows all the food consumed on a specific, or one single entry of the food diary, selected by its ID. Either date or ID can be specified, but not both.
-misfit/user | Shows the profile information of the Misfit user account
-misfit/activity/summary [start, end] | Shows a summary of the physical activity performed in the date range specified
-misfit/activity/goals [start, end] | Shows a list of the physical activity per day, calories burned vs. goal, for the entire date range specified
+__fatsecret/food-diary/month__ [date?] | Shows a summary of the nutritional information for an entire month. If date is not specified, the current month is taken by default
+__fatsecret/food-diary__ [(date, food_entry_id)+] | Shows all the food consumed on a specific, or one single entry of the food diary, selected by its ID. Either date or ID can be specified, but not both.
+__misfit/user__ | Shows the profile information of the Misfit user account
+__misfit/activity/summary__ [start, end] | Shows a summary of the physical activity performed in the date range specified
+__misfit/activity/goals__ [start, end] | Shows a list of the physical activity per day, calories burned vs. goal, for the entire date range specified
 
 The methods listed above have been implemented for test purposes, but more of them are available in each of the provider APIs. These could be implemented with minimal effort, by reusing the resource classes available in the external layer. For the complete list of operations available for Misfit and Fatsecret visit the following URLs:
 
@@ -57,7 +61,7 @@ The methods listed above have been implemented for test purposes, but more of th
 
 The integration layer implements a **REST client** and a **SOAP server**, to illustrate how both JAX-RS and JAX-WS can work together in the same solution, without affecting each other. One of the services located inside this layer deals with the business logic of integrating both internal and external data. Therefore, it has the task to translate one single incoming request from the application user into multiple outgoing requests to the provider APIs, or vice-versa. 
 
-An example of this type of operation can be found in the *getUserCalories* method of the SOAP server endpoint (package “integration.server.soap”). This service collects the nutritional information from Fatsecret about food calories gained, and combines it with the calorie consumption through physical exercise, obtained from the Misfit device. This orchestration process allows to get a unified perspective of the calories “coming in and out” of the body, providing a valuable insight for the end user. From a technical perspective, this is also a good example of how JSON and XML based services can be merged into a single result.
+An example of this type of operation can be found in the *getUserCalories* method of the SOAP server endpoint (package [“integration.server.soap”](/integration/src/main/java/integration/server/soap)). This service collects the nutritional information from Fatsecret about food calories gained, and combines it with the calorie consumption through physical exercise, obtained from the Misfit device. This orchestration process allows to get a unified perspective of the calories “coming in and out” of the body, providing a valuable insight for the end user. From a technical perspective, this is also a good example of how JSON and XML based services can be merged into a single result.
 
 A summary of the WS endpoints enabled in this layer, as well as the WSDL file can be found in the following link:
 
@@ -72,3 +76,7 @@ This layer does not perform any complex logical operations, but simply calls the
 You can access a live version of the dashboard at the following URL:
 
 - https://introsde-jcamposanok-p.herokuapp.com/dashboard
+
+Optionally, you can specify to view the results for a particular month by appending the folowing parameters to the path: “/year/{yyyy}/month/{MM}”, for example:
+
+- https://introsde-jcamposanok-p.herokuapp.com/dashboard/year/2017/month/01 
