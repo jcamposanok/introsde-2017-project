@@ -55,7 +55,7 @@ public class FatsecretFoodEntryResource {
                 return Response.ok(entity).build();
             }
             else {
-                FoodEntry entity = response.readEntity(FoodEntry.class);
+                FoodEntries entity = response.readEntity(FoodEntries.class);
                 return Response.ok(entity).build();
             }
         }
